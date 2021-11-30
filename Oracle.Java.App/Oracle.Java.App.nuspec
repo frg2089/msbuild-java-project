@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Oracle.Java.App</id>
+    <version>1.0.0</version>
+    <authors>frg2089</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <copyright>COPYRIGHT © 2021 frg2089</copyright>
+    <tags>MSBuild Java</tags>
+    <icon>Image/java.png</icon>
+    <description>None</description>
+  </metadata>
+  <files>
+    <!-- Add a readme -->
+    <file src="Sdk/**" target="Sdk" />
+    <file src="java.png" target="Image" />
+  </files>
+</package>
