@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Rule Name="Java" DisplayName="Java" Order="75" PageTemplate="generic" xmlns="http://schemas.microsoft.com/build/2009/properties">
+
+  <Rule.Categories>
+    <Category Name="General" DisplayName="General" />
+  </Rule.Categories>
+
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" HasConfigurationCondition="false" Label="Globals" />
+  </Rule.DataSource>
+
+  <EnumProperty Name="TargetFramework" DisplayName="目标框架" Description="目标框架" Category="General">
+    <EnumValue Name="jdk7" DisplayName="Java 7" Description="面向 Java 7" />
+    <EnumValue Name="jdk8" DisplayName="Java 8" Description="面向 Java 8" />
+    <EnumValue Name="jdk9" DisplayName="Java 9" Description="面向 Java 9" />
+    <EnumValue Name="jdk10" DisplayName="Java 10" Description="面向 Java 10" />
+    <EnumValue Name="jdk11" DisplayName="Java 11" Description="面向 Java 11" />
+    <EnumValue Name="jdk12" DisplayName="Java 12" Description="面向 Java 12" />
+    <EnumValue Name="jdk13" DisplayName="Java 13" Description="面向 Java 13" />
+    <EnumValue Name="jdk14" DisplayName="Java 14" Description="面向 Java 14" />
+    <EnumValue Name="jdk15" DisplayName="Java 15" Description="面向 Java 15" />
+    <EnumValue Name="jdk16" DisplayName="Java 16" Description="面向 Java 16" />
+    <EnumValue Name="jdk17" DisplayName="Java 17" Description="面向 Java 17" />
+    <EnumValue Name="jdk18" DisplayName="Java 18" Description="面向 Java 18" />
+    <EnumValue Name="jdk19" DisplayName="Java 19" Description="面向 Java 19" />
+    <EnumValue Name="jdk20" DisplayName="Java 20" Description="面向 Java 20" />
+    <EnumValue Name="jdk21" DisplayName="Java 21" Description="面向 Java 21" />
+    <EnumValue Name="jdk22" DisplayName="Java 22" Description="面向 Java 22" />
+    <EnumValue Name="jdk23" DisplayName="Java 23" Description="面向 Java 23" />
+    <EnumValue Name="jdk24" DisplayName="Java 24" Description="面向 Java 24" />
+  </EnumProperty>
+  <StringProperty Name="StartupObject" DisplayName="启动目标" Description="主函数类所在的位置" Category="General" />
+  <BoolProperty Name="UseDefaultItems" DisplayName="使用默认项目" Description="是否使用默认项目" Category="General" />
+</Rule>

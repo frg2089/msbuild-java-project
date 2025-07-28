@@ -1,0 +1,10 @@
+{
+  "explorer.fileNesting.patterns": {
+    "*.props": "${capture}.targets",
+  },
+  "files.associations": {
+    "*.*proj": "xml",
+    "*.slnx": "xml",
+  },
+  "xml.format.maxLineWidth": 0
+}

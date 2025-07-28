@@ -1,0 +1,12 @@
+<Project>
+  <!-- 模拟 SDK 行为 -->
+  <Import Project="$(MSBuildThisFileDirectory)\..\Sdk\Sdk.props" />
+
+  <PropertyGroup>
+    <TargetFramework>jdk11</TargetFramework>
+    <StartupObject>com.example.demo.Demo</StartupObject>
+  </PropertyGroup>
+
+  <!-- 模拟 SDK 行为 -->
+  <Import Project="$(MSBuildThisFileDirectory)\..\Sdk\Sdk.targets" />
+</Project>

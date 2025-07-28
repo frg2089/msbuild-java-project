@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  InitialTargets="CheckPlatform"
+  DefaultTargets="Build">
+  
+  <PropertyGroup>
+    <OutputPath Condition=" '$(Platform)' != 'AnyCPU' ">bin\$(Platform)\$(Configuration)</OutputPath>
+    <OutputPath Condition=" '$(Platform)' == 'AnyCPU' ">bin\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  
+  <Import Project="$(MSBuildThisFileDirectory)\DefaultItems.targets" Condition="$(UseDefaultItems)" />
+  <Import Project="$(MSBuildThisFileDirectory)\Shimakaze.Java.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\Compile.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\PackJar.targets" />
+
+  <Target Name="Build">
+    <CallTarget Targets="$(CompileTargets)" />
+  </Target>
+
+  <Target Name="Pack">
+    <CallTarget Targets="$(PackTargets)" />
+  </Target>
+
+</Project>

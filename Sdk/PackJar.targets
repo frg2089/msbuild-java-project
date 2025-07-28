@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- 打包命令 -->
+    <PackCommand Condition=" '$(PackCommand)' == '' ">jar</PackCommand>
+    <!-- 打包文件名 -->
+    <PackageName Condition=" '$(PackageName)' == '' ">$(MSBuildProjectName)</PackageName>
+    <PackageExt Condition=" '$(PackageExt)' == '' ">.jar</PackageExt>
+    <!-- 打包目标 -->
+    <PackTargets>$(PackTargets);PackJar</PackTargets>
+    <PackTargets>PrePackJar;$(PackTargets)</PackTargets>
+  </PropertyGroup>
+
+  <Target Name="PrePackJar" DependsOnTargets="CoreCompile">
+    <PropertyGroup>
+      <_JarOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)\$(PackageName)$(PackageExt)</_JarOutputPath>
+
+      <PackCommand>$(PackCommand) --create</PackCommand>
+      <!-- 设置输出文件 -->
+      <PackCommand>$(PackCommand) --file "$(_JarOutputPath)"</PackCommand>
+      <!-- 设置入口点 -->
+      <PackCommand Condition=" '$(StartupObject)' != '' ">$(PackCommand) --main-class $(StartupObject)</PackCommand>
+      <!-- 设置入口点 -->
+      <PackCommand Condition=" '$(Version)' != '' ">$(PackCommand) --module-version $(Version)</PackCommand>
+      <!-- 设置字节码文件 -->
+      <PackCommand>$(PackCommand) @(Compile -> '"%(ClassFile)"', ' ')</PackCommand>
+    </PropertyGroup>
+  </Target>
+
+  <Target
+    Name="PackJar"
+    DependsOnTargets="PrePackJar"
+    Inputs="%(Compile.ClassFile)"
+    Outputs="$(_JarOutputPath)">
+    <Exec Command="$(PackCommand)" WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Platform>AnyCPU</Platform>
+    <Configuration>Debug</Configuration>
+
+    <!-- 是否使用默认项目 -->
+    <UseDefaultItems Condition=" '$(UseDefaultItems)' == '' ">True</UseDefaultItems>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)\Shimakaze.Java.props" />
+
+  <!-- 属性页面定义 -->
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\JavaRules.Project.xml" Context="Project"/>
+  </ItemGroup>
+
+</Project>

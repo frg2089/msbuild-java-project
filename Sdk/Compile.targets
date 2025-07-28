@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- 编译命令 -->
+    <CompileCommand Condition=" '$(CompileCommand)' == '' ">javac</CompileCommand>
+
+    <!-- 编译目标 -->
+    <CompileTargets>$(CompileTargets);CoreCompile</CompileTargets>
+    <CompileTargets>PreCoreCompile;$(CompileTargets)</CompileTargets>
+  </PropertyGroup>
+  
+  <Target Name="PreCoreCompile">
+    <PropertyGroup>
+      <!-- 获取编译输出目录 -->
+      <_CompileOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</_CompileOutputPath>
+      <!-- 去掉 TargetFramework 的 jdk 前缀 -->
+      <_TargetFrameworkVersion Condition="$(TargetFramework.StartsWith('jdk'))">$(TargetFramework.Substring(3))</_TargetFrameworkVersion>
+      
+      <!-- 设置输出目录 -->
+      <CompileCommand>$(CompileCommand) -d "$(_CompileOutputPath)"</CompileCommand>
+      <!-- 设置源文件编码 -->
+      <CompileCommand>$(CompileCommand) -encoding $(DefaultEncoding)</CompileCommand>
+      <!-- 设置目标 JVM 版本 -->
+      <CompileCommand>$(CompileCommand) --release $(_TargetFrameworkVersion)</CompileCommand>
+      <!-- 设置源文件 -->
+      <CompileCommand>$(CompileCommand) @(Compile -> '"%(Identity)"', ' ')</CompileCommand>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Update="%(Compile.Identity)" ClassFile="$(_CompileOutputPath)\%(RecursiveDir)%(Filename).class">
+        <ClassFile>$([MSBuild]::MakeRelative('$(MSBuildProjectDirectory)\$(SourcePath)', '%(RecursiveDir)'))%(Filename).class</ClassFile>
+      </Compile>
+    </ItemGroup>
+  </Target>
+  
+  <Target
+    Name="CoreCompile"
+    DependsOnTargets="PreCoreCompile"
+    Inputs="@(Compile)"
+    Outputs="@(Compile -> '$(_CompileOutputPath)\%(ClassFile)')">
+    <Exec Command="$(CompileCommand)" />
+  </Target>
+</Project>
